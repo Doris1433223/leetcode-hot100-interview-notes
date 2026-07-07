@@ -34,7 +34,7 @@
 
 #### 完整带注释 Python 代码
 ```python
-# 解法说明：双层循环试探。代码保留原笔记实现，便于对照复盘。
+# 解法说明：双层循环试探。
 def twoSum_bruteforce(nums, target):
     n = len(nums)
     for i in range(n):
