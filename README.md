@@ -1,4 +1,5 @@
 # leetcode-hot100-interview-notes
+A full set of solutions & in-depth interview breakdowns for LeetCode Hot 100, tailored for LLM, NLP and algorithm engineer interviews.
 
 ## 仓库用途
 
