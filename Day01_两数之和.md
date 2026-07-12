@@ -1,4 +1,4 @@
-<img width="2103" height="1098" alt="图片" src="https://github.com/user-attachments/assets/d7d769ee-80aa-4f04-990e-9acea30e6dbc" /># Day01 两数之和
+# Day01 两数之和
 
 ## 基础信息
 
