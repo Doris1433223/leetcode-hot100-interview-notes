@@ -1,4 +1,4 @@
-# Day01 两数之和
+<img width="2103" height="1098" alt="图片" src="https://github.com/user-attachments/assets/d7d769ee-80aa-4f04-990e-9acea30e6dbc" /># Day01 两数之和
 
 ## 基础信息
 
@@ -37,17 +37,18 @@
 #### 完整带注释 Python 代码
 ```python
 # 解法说明：双层循环试探。
-def twoSum_bruteforce(nums, target):
-    n = len(nums)
-    for i in range(n):
-        for j in range(i + 1, n):
-            if nums[i] + nums[j] == target:
-                return [i, j]
-    return []
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        n = len(nums)
+        for i in range(n):
+            for j in range(i + 1, n):
+                if nums[i] + nums[j] == target:
+                    return [i, j]
+        return []
 ```
 
 ### 最优解法：哈希表一次扫描
-
+     
 #### 核心思想
 用「映射/计数状态」理解两数之和。边遍历边查补数，用空间换掉第二层循环
 
@@ -63,14 +64,15 @@ def twoSum_bruteforce(nums, target):
 #### 完整带注释 Python 代码
 ```python
 # 解法说明：哈希表一次扫描。
-def twoSum_hash(nums, target):
-    seen = {}
-    for i, num in enumerate(nums):
-        need = target - num
-        if need in seen:
-            return [seen[need], i]
-        seen[num] = i
-    return []
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        seen = {}
+        for i, num in enumerate(nums):
+            need = target - num
+            if need in seen:
+                return [seen[need], i]
+            seen[num] = i
+        return []
 ```
 
 ### 拓展变形解法：排序+双指针保原下标
@@ -90,18 +92,19 @@ def twoSum_hash(nums, target):
 #### 完整带注释 Python 代码
 ```python
 # 解法说明：排序+双指针保原下标。
-def twoSum_sort_two_pointer(nums, target):
-    arr = sorted((num, i) for i, num in enumerate(nums))
-    left, right = 0, len(arr) - 1
-    while left < right:
-        total = arr[left][0] + arr[right][0]
-        if total == target:
-            return [arr[left][1], arr[right][1]]
-        if total < target:
-            left += 1
-        else:
-            right -= 1
-    return []
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        arr = sorted((num, i) for i, num in enumerate(nums))
+        left, right = 0, len(arr) - 1
+        while left < right:
+            total = arr[left][0] + arr[right][0]
+            if total == target:
+                return [arr[left][1], arr[right][1]]
+            if total < target:
+                left += 1
+            else:
+                right -= 1
+        return []
 ```
 
 ## 方案横向对比
