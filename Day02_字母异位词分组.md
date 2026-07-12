@@ -9,7 +9,9 @@
 
 ## 题意分析
 
-给定字符串数组，把由相同字母重新排列得到的字符串归到同一组
+给你一个字符串数组，请你将**字母异位词**组合在一起。可以按任意顺序返回结果列表。
+
+*字母异位词*: 通过重新排列不同单词或短语的字母而形成的单词或短语，并使用所有原字母一次。
 
 核心约束与边界条件：
 - 先确认输入规模，再选择能通过的复杂度
@@ -35,17 +37,15 @@
 #### 完整带注释 Python 代码
 ```python
 # 解法说明：逐词排序签名。
-from collections import defaultdict
-
-def solution_49_1(items, target=None):
-    seen = {}
-    for i, x in enumerate(items):
-        if target is not None and isinstance(x, int):
-            need = target - x
-            if need in seen:
-                return [seen[need], i]
-        seen[x] = i
-    return seen
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        hash_map = {}
+        for s in strs:
+            sort_key = ''.join(sorted(s))
+            if sort_key not in hash_map:
+                hash_map[sort_key] = []
+            hash_map[sort_key].append(s)
+        return list(hash_map.values())
 ```
 
 ### 最优解法：26 维计数签名
@@ -65,17 +65,18 @@ def solution_49_1(items, target=None):
 #### 完整带注释 Python 代码
 ```python
 # 解法说明：26 维计数签名。
-from collections import defaultdict
-
-def solution_49_2(items, target=None):
-    seen = {}
-    for i, x in enumerate(items):
-        if target is not None and isinstance(x, int):
-            need = target - x
-            if need in seen:
-                return [seen[need], i]
-        seen[x] = i
-    return seen
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        group_map = defaultdict(list)
+        for s in strs:
+            count = [0] * 26
+            for char in s:
+                idx = ord(char) - ord('a')
+                count[idx] += 1
+            # 列表不可哈希，转元组作为key
+            count_key = tuple(count)
+            group_map[count_key].append(s)
+        return list(group_map.values())
 ```
 
 ### 拓展变形解法：质数乘积/压缩签名
@@ -95,17 +96,17 @@ def solution_49_2(items, target=None):
 #### 完整带注释 Python 代码
 ```python
 # 解法说明：质数乘积/压缩签名。
-from collections import defaultdict
-
-def solution_49_3(items, target=None):
-    seen = {}
-    for i, x in enumerate(items):
-        if target is not None and isinstance(x, int):
-            need = target - x
-            if need in seen:
-                return [seen[need], i]
-        seen[x] = i
-    return seen
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        # a-z 对应26个质数
+        primes = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101]
+        group_map = defaultdict(list)
+        for s in strs:
+            product = 1
+            for char in s:
+                product *= primes[ord(char)-ord('a')]
+            group_map[product].append(s)
+        return list(group_map.values())
 ```
 
 ## 方案横向对比
